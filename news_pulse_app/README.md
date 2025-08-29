@@ -8,6 +8,7 @@ A complete starter to build a personalized news app using **Streamlit**, **SQLit
 - ⚙️ Preferences: categories, sources, keywords
 - 🔎 Search bar to query news
 - 🧠 Sentiment analysis per article (positive / neutral / negative + score)
+- 🏷️ Named Entity Recognition (NER) to extract key people, places, and organizations from articles
 - 🔖 Bookmarks (save/remove) + export to CSV
 - 🏠 Home: Top headlines by your preferred categories
 - 🕑 Search history
@@ -62,6 +63,7 @@ news_pulse_app/
 
 ## 5) Notes
 - Sentiment uses the article **title + description** for a quick signal.
+- NER highlights important entities (like companies, politicians, locations) to give richer context per article.
 - Streamlit keeps login session in `st.session_state` (not secure for production).
 - For production, add proper session management and HTTPS.
 
@@ -70,3 +72,4 @@ news_pulse_app/
 - Add email digests of top stories.
 - Add admin dashboard to manage users.
 - Add per-article feedback to refine keyword prefs.
+- Use NER results to auto-tag bookmarks and improve personalized news recommendations.

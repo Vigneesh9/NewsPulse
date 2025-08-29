@@ -154,7 +154,6 @@ def render_article_card(article: Dict[str, Any], user_id: int):
     # Perform NER on the combined text
     doc = nlp(combined_text)
     entities = [(ent.text, ent.label_) for ent in doc.ents]
-    entity_list = [f"{text} ({label})" for text, label in sorted(entities, key=lambda x: x[0])]  # Sort by entity text
 
     with st.container(border=True):
         cols = st.columns([1, 3])
@@ -170,9 +169,11 @@ def render_article_card(article: Dict[str, Any], user_id: int):
         sentiment_badge = f"**Sentiment:** :{'smile:' if label=='positive' else 'neutral_face:' if label=='neutral' else 'slightly_frowning_face:'} **{label.title()}** ({score:.2f})"
         cols[1].markdown(sentiment_badge)
 
-        # Display recognized entities side by side with commas
-        if entity_list:
-            cols[1].markdown(f"**Named Entities:** {', '.join(entity_list)}")
+        # Display recognized entities in the desired format
+        if entities:
+            cols[1].markdown("**Named Entities:**")
+            for entity_text, entity_type in sorted(entities, key=lambda x: x[0]):  # Sort by entity text
+                cols[1].markdown(f"- {entity_text} ({entity_type})")
 
         save_col, open_col = st.columns([1,1])
         if save_col.button("🔖 Save", key=f"save_{article.get('url')}"):
@@ -299,7 +300,7 @@ def page_about():
     )
     st.caption("Built for learning purposes.")
 
-# ---------- Main ------------
+# ---------- Main ----------
 def main():
     show_header()
     ensure_logged_in()

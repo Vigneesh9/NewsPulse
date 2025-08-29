@@ -299,7 +299,7 @@ def page_about():
     )
     st.caption("Built for learning purposes.")
 
-# ---------- Main ----------
+# ---------- Main ------------
 def main():
     show_header()
     ensure_logged_in()
